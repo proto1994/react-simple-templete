@@ -71,6 +71,10 @@ module.exports = {
       title: "react-simple-templete",
       template: "./public/index.html",
     }),
+    new MiniCssExtractPlugin({
+      filename: "[name].[chunkhash].css",
+      chunkFilename: "[id].[chunkhash].css",
+    }),
     new DashboardPlugin(),
   ],
 };

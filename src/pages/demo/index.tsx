@@ -15,6 +15,7 @@ export default function Demo() {
         </span>
         <span>{count}</span>
         <span
+          className="add"
           onClick={() => {
             setCount(count + 1);
           }}
