@@ -3,14 +3,12 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const { default: webpack } = require("webpack");
 
-const DashboardPlugin = require("webpack-dashboard/plugin");
-
+var HardSourceWebpackPlugin = require("hard-source-webpack-plugin");
 const isProd = process.env.ENV === "production";
 
 module.exports = {
   entry: {
     app: "./src/app",
-    vender: ["react", "react-dom"],
   },
   output: {
     filename: "[name].[chunkhash].js",
@@ -27,6 +25,7 @@ module.exports = {
       },
       {
         test: /\.(sa|sc|c)ss$/,
+        include: [path.resolve(__dirname, "src")],
         use: [
           {
             loader: MiniCssExtractPlugin.loader,
@@ -38,6 +37,7 @@ module.exports = {
       },
       {
         test: /\.(less)$/,
+        include: [path.resolve(__dirname, "src")],
         use: [
           {
             loader: MiniCssExtractPlugin.loader,
@@ -50,6 +50,7 @@ module.exports = {
       {
         test: /\.(png|jpg|gif)$/,
         use: ["file-loader"],
+        include: [path.resolve(__dirname, "src")],
       },
       {
         test: /\.(png|jpg|gif)$/,
@@ -59,6 +60,7 @@ module.exports = {
             limit: 10240,
           },
         },
+        include: [path.resolve(__dirname, "src")],
       },
     ],
   },
@@ -69,12 +71,13 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       title: "react-simple-templete",
+      inject: true,
       template: "./public/index.html",
     }),
     new MiniCssExtractPlugin({
       filename: "[name].[chunkhash].css",
       chunkFilename: "[id].[chunkhash].css",
     }),
-    new DashboardPlugin(),
+    new HardSourceWebpackPlugin(),
   ],
 };

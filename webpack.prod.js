@@ -3,7 +3,8 @@ const { merge } = require("webpack-merge");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const common = require("./webpack.common.js");
 const BundleAnalyzerPlugin = require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+// new BundleAnalyzerPlugin()
+
 module.exports = merge(common, {
   mode: "production",
   optimization: {
@@ -11,5 +12,5 @@ module.exports = merge(common, {
       chunks: "all",
     },
   },
-  plugins: [new CleanWebpackPlugin(), new BundleAnalyzerPlugin()],
+  plugins: [new CleanWebpackPlugin()],
 });
